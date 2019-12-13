@@ -1,6 +1,6 @@
--   id: yesqa
-    name: Strip unnecessary `# noqa`s
-    description: Automatically remove unnecessary `# noqa` comments
-    entry: yesqa
+-   id: blacklist
+    name: Disallow strings
+    description: Configure strings to be un-comittable
+    entry: blacklist
     language: python
     types: [python]
