@@ -5,6 +5,8 @@ import argparse
 
 # TODO make this configurable
 def search_file(filename, bad_string):
+    retv = 0
+
     with open(filename, "rb") as f:
         contents_bytes = f.read()
 
@@ -25,12 +27,13 @@ def search_file(filename, bad_string):
                 print(f"{filename}: {cnt}")
                 line = fp.readline()
                 cnt += 1
-                return 1
+                retv = 1
+
+    return retv
 
 
 def fix_file(filename):
-    search_file("NOCOMMIT")
-    return 0
+    return search_file(filename, "NOCOMMIT")
 
 
 def main(argv=None):
