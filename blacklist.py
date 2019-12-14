@@ -1,11 +1,10 @@
-from __future__ import absolute_import
-from __future__ import print_function
-from __future__ import unicode_literals
+from __future__ import absolute_import, print_function, unicode_literals
 
 import argparse
 
 
-def fix_file(filename):
+# TODO make this configurable
+def search_file(filename, bad_string):
     with open(filename, "rb") as f:
         contents_bytes = f.read()
 
@@ -15,10 +14,22 @@ def fix_file(filename):
         print("{} is non-utf8 (not supported)".format(filename))
         return 1
 
-    # TODO make this configurable
-    if "NOCOMMIT" in contents_text:
-        return 1
+    if bad_string not in contents_text:
+        return 0
 
+    with open(filename) as fp:
+        line = fp.readline()
+        cnt = 1
+        while line:
+            if bad_string in line:
+                print(f"{filename}: {cnt}")
+                line = fp.readline()
+                cnt += 1
+                return 1
+
+
+def fix_file(filename):
+    search_file("NOCOMMIT")
     return 0
 
 
