@@ -24,10 +24,10 @@ def search_file(filename, bad_string):
         cnt = 1
         while line:
             if bad_string in line:
-                print(f"{filename}: {cnt}")
-                line = fp.readline()
-                cnt += 1
                 retv = 1
+                print(f"{filename}: {cnt}")
+            line = fp.readline()
+            cnt += 1
 
     return retv
 
